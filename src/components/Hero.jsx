@@ -2,6 +2,17 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 
 const Hero = () => {
+  // Smooth scroll function
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section className={`relative w-full h-screen mx-auto overflow-hidden`}>
       {/* Gradient Background Overlay */}
@@ -64,7 +75,7 @@ const Hero = () => {
             and Mobile Applications
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons with Working Navigation */}
           <motion.div 
             className="flex flex-wrap gap-4 mt-8"
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +83,8 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <motion.button
-              className="bg-[#915EFF] text-white font-bold py-3 px-8 rounded-full shadow-lg"
+              onClick={() => scrollToSection('work')}
+              className="bg-[#915EFF] text-white font-bold py-3 px-8 rounded-full shadow-lg cursor-pointer"
               whileHover={{ 
                 scale: 1.05, 
                 boxShadow: "0 0 25px rgba(145, 94, 255, 0.6)" 
@@ -82,7 +94,8 @@ const Hero = () => {
               View My Work
             </motion.button>
             <motion.button
-              className="border-2 border-[#915EFF] text-white font-bold py-3 px-8 rounded-full"
+              onClick={() => scrollToSection('contact')}
+              className="border-2 border-[#915EFF] text-white font-bold py-3 px-8 rounded-full cursor-pointer"
               whileHover={{ 
                 scale: 1.05, 
                 backgroundColor: "rgba(145, 94, 255, 0.1)" 
@@ -264,9 +277,16 @@ const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
       >
-        <a href='#about' aria-label="Scroll to about section">
+        <a 
+          href='#about' 
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('about');
+          }}
+          aria-label="Scroll to about section"
+        >
           <motion.div 
-            className='w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'
+            className='w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2 cursor-pointer'
             whileHover={{ scale: 1.1, borderColor: "#915EFF" }}
           >
             <motion.div
